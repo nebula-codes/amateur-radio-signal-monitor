@@ -1,0 +1,85 @@
+<div class="table-container">
+  <!-- Loading Spinner -->
+  <div *ngIf="isLoading" class="loading-container">
+    <mat-spinner></mat-spinner>
+    <p>Loading signal data...</p>
+  </div>
+
+  <!-- Data Table -->
+  <div *ngIf="!isLoading">
+    <mat-table [dataSource]="dataSource" matSort class="signal-table">
+      
+      <!-- Call Sign Column -->
+      <ng-container matColumnDef="callSign">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Call Sign</mat-header-cell>
+        <mat-cell *matCellDef="let signal">{{ signal.callSign }}</mat-cell>
+      </ng-container>
+
+      <!-- Frequency Column -->
+      <ng-container matColumnDef="frequency">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Frequency</mat-header-cell>
+        <mat-cell *matCellDef="let signal">{{ formatFrequency(signal.frequency) }}</mat-cell>
+      </ng-container>
+
+      <!-- Mode Column -->
+      <ng-container matColumnDef="mode">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Mode</mat-header-cell>
+        <mat-cell *matCellDef="let signal">{{ signal.mode }}</mat-cell>
+      </ng-container>
+
+      <!-- Band Column -->
+      <ng-container matColumnDef="band">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Band</mat-header-cell>
+        <mat-cell *matCellDef="let signal">{{ signal.band }}</mat-cell>
+      </ng-container>
+
+      <!-- Signal Strength Column -->
+      <ng-container matColumnDef="signalStrength">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Signal Strength</mat-header-cell>
+        <mat-cell *matCellDef="let signal">{{ formatSignalStrength(signal.signalStrength) }}</mat-cell>
+      </ng-container>
+
+      <!-- Timestamp Column -->
+      <ng-container matColumnDef="timestamp">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Timestamp</mat-header-cell>
+        <mat-cell *matCellDef="let signal">{{ formatTimestamp(signal.timestamp) }}</mat-cell>
+      </ng-container>
+
+      <!-- Location Column -->
+      <ng-container matColumnDef="location">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Location</mat-header-cell>
+        <mat-cell *matCellDef="let signal">{{ signal.location }}</mat-cell>
+      </ng-container>
+
+      <!-- Country Column -->
+      <ng-container matColumnDef="country">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Country</mat-header-cell>
+        <mat-cell *matCellDef="let signal">{{ signal.country }}</mat-cell>
+      </ng-container>
+
+      <!-- Power Column -->
+      <ng-container matColumnDef="power">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Power</mat-header-cell>
+        <mat-cell *matCellDef="let signal">{{ formatPower(signal.power) }}</mat-cell>
+      </ng-container>
+
+      <!-- Notes Column -->
+      <ng-container matColumnDef="notes">
+        <mat-header-cell *matHeaderCellDef>Notes</mat-header-cell>
+        <mat-cell *matCellDef="let signal">{{ signal.notes || '-' }}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <!-- Paginator -->
+    <mat-paginator 
+      #signalPaginator
+      [pageSizeOptions]="[10, 25, 50, 100]"
+      [pageSize]="10"
+      showFirstLastButtons
+      aria-label="Select page of signals">
+    </mat-paginator>
+  </div>
+</div>

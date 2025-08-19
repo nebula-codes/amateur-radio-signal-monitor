@@ -1,0 +1,137 @@
+.filter-card {
+  height: 100%;
+  width: 100%;
+  max-width: 500px;
+  margin: 16px;
+}
+
+.filter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.chip-container {
+  margin-bottom: 12px;
+}
+
+.chip-container mat-chip-set {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.date-time-section,
+.range-section {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 8px;
+}
+
+.date-time-section h4,
+.range-section h4 {
+  margin: 0 0 16px 0;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.date-time-row,
+.range-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.date-field {
+  flex: 2;
+  min-width: 200px;
+}
+
+.time-field {
+  flex: 1.5;
+  min-width: 140px;
+}
+
+.range-field {
+  flex: 1;
+  min-width: 120px;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.filter-actions button {
+  flex: 1;
+}
+
+/* Responsive design */
+@media screen and (max-width: 1024px) {
+  .filter-card {
+    max-width: 420px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .filter-card {
+    margin: 8px;
+    max-width: none;
+  }
+  
+  .date-time-row,
+  .range-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .date-field,
+  .time-field,
+  .range-field {
+    flex: none;
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .filter-actions {
+    flex-direction: column;
+  }
+  
+  .filter-actions button {
+    width: 100%;
+  }
+}
+
+/* Custom chip styling */
+mat-chip {
+  background-color: rgba(0, 188, 212, 0.1) !important;
+  color: #00bcd4 !important;
+}
+
+mat-chip mat-icon {
+  color: #00bcd4 !important;
+}
+
+/* Form field styling */
+.mat-mdc-form-field {
+  margin-bottom: 8px;
+}
+
+.mat-mdc-form-field-hint {
+  font-size: 12px;
+}
+
+/* Section headers */
+h4 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.25px;
+}
