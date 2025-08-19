@@ -45,7 +45,7 @@ export class ColumnSelectorComponent {
 
   resetToDefault(): void {
     // Reset to commonly used columns
-    const defaultVisible = ['id', 'callSign', 'frequency', 'mode', 'band', 'signalStrength', 'timestamp'];
+    const defaultVisible = ['id', 'callSign', 'frequency', 'mode', 'band', 'signalStrength', 'timestamp', 'actions'];
     this.columns.forEach(col => {
       col.visible = defaultVisible.includes(col.key);
     });

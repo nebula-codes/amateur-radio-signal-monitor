@@ -21,7 +21,7 @@
 
 .signal-table {
   width: 100%;
-  min-width: 600px;
+  min-width: 800px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   border-radius: 8px;
   overflow: hidden;
@@ -53,4 +53,35 @@ mat-paginator {
   background-color: var(--mat-sys-surface-container-high);
   border-top: 1px solid var(--mat-sys-outline-variant);
   color: var(--mat-sys-on-surface);
+}
+
+/* Action buttons styling */
+.action-buttons {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 4px 0;
+}
+
+.action-btn {
+  width: 28px !important;
+  height: 28px !important;
+  line-height: 28px;
+}
+
+.action-btn mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+/* Ensure actions column has enough width */
+.signal-table mat-cell.mat-column-actions,
+.signal-table mat-header-cell.mat-column-actions {
+  min-width: 200px;
+  max-width: 200px;
+  width: 200px;
+  text-align: center;
 }

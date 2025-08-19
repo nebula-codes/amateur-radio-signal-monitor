@@ -155,7 +155,8 @@ export class SignalDataService {
       { key: 'location', label: 'Location', visible: false, type: 'string' },
       { key: 'country', label: 'Country', visible: false, type: 'string' },
       { key: 'power', label: 'Power', visible: false, type: 'number', unit: 'W' },
-      { key: 'notes', label: 'Notes', visible: false, type: 'string' }
+      { key: 'notes', label: 'Notes', visible: false, type: 'string' },
+      { key: 'actions', label: 'Actions', visible: true, type: 'actions' }
     ];
   }
 }

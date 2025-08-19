@@ -13,7 +13,58 @@
       <ng-container *ngFor="let column of columnConfig" [matColumnDef]="column.key">
         <mat-header-cell *matHeaderCellDef mat-sort-header>{{ column.label }}</mat-header-cell>
         <mat-cell *matCellDef="let signal">
-          {{ formatCellValue(getCellValue(signal, column.key), column.key) }}
+          <!-- Regular data columns -->
+          <span *ngIf="column.type !== 'actions'">
+            {{ formatCellValue(getCellValue(signal, column.key), column.key) }}
+          </span>
+          
+          <!-- Actions column with 6 buttons -->
+          <div *ngIf="column.type === 'actions'" class="action-buttons">
+            <button mat-mini-fab 
+                    color="primary" 
+                    (click)="onAction1(signal)"
+                    matTooltip="Action 1"
+                    class="action-btn">
+              <mat-icon>star</mat-icon>
+            </button>
+            
+            <button mat-mini-fab 
+                    color="accent" 
+                    (click)="onAction2(signal)"
+                    matTooltip="Action 2"
+                    class="action-btn">
+              <mat-icon>bookmark</mat-icon>
+            </button>
+            
+            <button mat-mini-fab 
+                    color="warn" 
+                    (click)="onAction3(signal)"
+                    matTooltip="Action 3"
+                    class="action-btn">
+              <mat-icon>edit</mat-icon>
+            </button>
+            
+            <button mat-mini-fab 
+                    (click)="onAction4(signal)"
+                    matTooltip="Action 4"
+                    class="action-btn">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            
+            <button mat-mini-fab 
+                    (click)="onAction5(signal)"
+                    matTooltip="Action 5"
+                    class="action-btn">
+              <mat-icon>share</mat-icon>
+            </button>
+            
+            <button mat-mini-fab 
+                    (click)="onAction6(signal)"
+                    matTooltip="Action 6"
+                    class="action-btn">
+              <mat-icon>download</mat-icon>
+            </button>
+          </div>
         </mat-cell>
       </ng-container>
 

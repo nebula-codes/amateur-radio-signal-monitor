@@ -20,10 +20,10 @@ export interface DateTimeFilter {
 }
 
 export interface ColumnConfig {
-  key: keyof SignalData;
+  key: keyof SignalData | 'actions';
   label: string;
   visible: boolean;
-  type: 'string' | 'number' | 'date' | 'boolean';
+  type: 'string' | 'number' | 'date' | 'boolean' | 'actions';
   unit?: string;
 }
 

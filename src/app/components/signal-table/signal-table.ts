@@ -5,6 +5,9 @@ import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Subject, takeUntil, catchError, finalize } from 'rxjs';
 import { SignalData, SignalFilters, ColumnConfig } from '../../models/signal-data.interface';
 import { SignalDataService } from '../../services/signal-data.service';
@@ -18,7 +21,10 @@ import { FilterService } from '../../services/filter.service';
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule
   ],
   templateUrl: './signal-table.html',
   styleUrl: './signal-table.css'
@@ -185,5 +191,30 @@ export class SignalTableComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getCellValue(element: SignalData, columnKey: string): any {
     return (element as any)[columnKey];
+  }
+
+  // Action methods for the 6 buttons
+  onAction1(signal: SignalData): void {
+    console.log('Action 1 - Signal Data:', signal);
+  }
+
+  onAction2(signal: SignalData): void {
+    console.log('Action 2 - Signal Data:', signal);
+  }
+
+  onAction3(signal: SignalData): void {
+    console.log('Action 3 - Signal Data:', signal);
+  }
+
+  onAction4(signal: SignalData): void {
+    console.log('Action 4 - Signal Data:', signal);
+  }
+
+  onAction5(signal: SignalData): void {
+    console.log('Action 5 - Signal Data:', signal);
+  }
+
+  onAction6(signal: SignalData): void {
+    console.log('Action 6 - Signal Data:', signal);
   }
 }
