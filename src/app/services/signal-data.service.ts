@@ -155,6 +155,8 @@ export class SignalDataService {
       { key: 'signalStrength', label: 'Signal Strength', visible: true, type: 'number', unit: 'dB' },
       { key: 'timestamp', label: 'Timestamp', visible: true, type: 'date' },
       { key: 'location', label: 'Location', visible: false, type: 'string' },
+      { key: 'latitude', label: 'Latitude', visible: false, type: 'number', unit: '°' },
+      { key: 'longitude', label: 'Longitude', visible: false, type: 'number', unit: '°' },
       { key: 'country', label: 'Country', visible: false, type: 'string' },
       { key: 'power', label: 'Power', visible: false, type: 'number', unit: 'W' },
       { key: 'notes', label: 'Notes', visible: false, type: 'string' },

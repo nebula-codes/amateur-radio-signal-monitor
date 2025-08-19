@@ -182,7 +182,16 @@ export class SignalTableComponent implements OnInit, OnDestroy, AfterViewInit {
     switch (column.type) {
       case 'number':
         if (column.unit) {
-          return `${Number(value).toFixed(column.key === 'frequency' ? 3 : column.key === 'signalStrength' ? 1 : 0)} ${column.unit}`;
+          // Special formatting for different number types
+          if (columnKey === 'frequency') {
+            return `${Number(value).toFixed(3)} ${column.unit}`;
+          } else if (columnKey === 'signalStrength') {
+            return `${Number(value).toFixed(1)} ${column.unit}`;
+          } else if (columnKey === 'latitude' || columnKey === 'longitude') {
+            return `${Number(value).toFixed(6)} ${column.unit}`;
+          } else {
+            return `${Number(value).toFixed(0)} ${column.unit}`;
+          }
         }
         return String(value);
       case 'date':
