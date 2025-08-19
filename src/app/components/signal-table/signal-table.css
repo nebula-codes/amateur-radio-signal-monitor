@@ -1,6 +1,8 @@
 .table-container {
   padding: 20px;
   width: 100%;
+  max-width: calc(100vw - 450px - 40px);
+  overflow-x: auto;
   background-color: var(--mat-sys-surface);
 }
 
@@ -19,6 +21,7 @@
 
 .signal-table {
   width: 100%;
+  min-width: 600px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   border-radius: 8px;
   overflow: hidden;
@@ -33,7 +36,7 @@
 
 .signal-table mat-cell,
 .signal-table mat-header-cell {
-  padding: 12px 8px;
+  padding: 8px 6px;
   border-bottom: 1px solid var(--mat-sys-outline-variant);
   color: var(--mat-sys-on-surface);
 }
@@ -50,58 +53,4 @@ mat-paginator {
   background-color: var(--mat-sys-surface-container-high);
   border-top: 1px solid var(--mat-sys-outline-variant);
   color: var(--mat-sys-on-surface);
-}
-
-/* Responsive table */
-@media screen and (max-width: 1200px) {
-  .signal-table {
-    font-size: 14px;
-  }
-  
-  .signal-table mat-cell,
-  .signal-table mat-header-cell {
-    padding: 8px 4px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .table-container {
-    padding: 10px;
-  }
-  
-  .signal-table {
-    font-size: 12px;
-  }
-  
-  .signal-table mat-cell,
-  .signal-table mat-header-cell {
-    padding: 6px 2px;
-  }
-}
-
-/* Responsive table */
-@media screen and (max-width: 1200px) {
-  .signal-table {
-    font-size: 14px;
-  }
-  
-  .signal-table mat-cell,
-  .signal-table mat-header-cell {
-    padding: 8px 4px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .table-container {
-    padding: 10px;
-  }
-  
-  .signal-table {
-    font-size: 12px;
-  }
-  
-  .signal-table mat-cell,
-  .signal-table mat-header-cell {
-    padding: 6px 2px;
-  }
 }

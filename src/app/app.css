@@ -54,6 +54,8 @@
   padding: 0;
   background-color: var(--mat-sys-surface);
   min-height: calc(100vh - 64px);
+  overflow-x: hidden;
+  max-width: calc(100vw - 450px);
 }
 
 /* Responsive design */
