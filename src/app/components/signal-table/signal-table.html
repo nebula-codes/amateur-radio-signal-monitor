@@ -22,7 +22,7 @@
           <div *ngIf="column.type === 'actions'" class="action-buttons">
             <button mat-mini-fab 
                     color="primary" 
-                    (click)="onAction1(signal)"
+                    (click)="onAction1(signal); $event.stopPropagation()"
                     matTooltip="Action 1"
                     class="action-btn">
               <mat-icon>star</mat-icon>
@@ -30,7 +30,7 @@
             
             <button mat-mini-fab 
                     color="accent" 
-                    (click)="onAction2(signal)"
+                    (click)="onAction2(signal); $event.stopPropagation()"
                     matTooltip="Action 2"
                     class="action-btn">
               <mat-icon>bookmark</mat-icon>
@@ -38,28 +38,28 @@
             
             <button mat-mini-fab 
                     color="warn" 
-                    (click)="onAction3(signal)"
+                    (click)="onAction3(signal); $event.stopPropagation()"
                     matTooltip="Action 3"
                     class="action-btn">
               <mat-icon>edit</mat-icon>
             </button>
             
             <button mat-mini-fab 
-                    (click)="onAction4(signal)"
+                    (click)="onAction4(signal); $event.stopPropagation()"
                     matTooltip="Action 4"
                     class="action-btn">
               <mat-icon>visibility</mat-icon>
             </button>
             
             <button mat-mini-fab 
-                    (click)="onAction5(signal)"
+                    (click)="onAction5(signal); $event.stopPropagation()"
                     matTooltip="Action 5"
                     class="action-btn">
               <mat-icon>share</mat-icon>
             </button>
             
             <button mat-mini-fab 
-                    (click)="onAction6(signal)"
+                    (click)="onAction6(signal); $event.stopPropagation()"
                     matTooltip="Action 6"
                     class="action-btn">
               <mat-icon>download</mat-icon>
