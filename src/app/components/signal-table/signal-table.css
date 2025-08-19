@@ -1,6 +1,7 @@
 .table-container {
   padding: 20px;
   width: 100%;
+  background-color: var(--mat-sys-surface);
 }
 
 .loading-container {
@@ -13,38 +14,69 @@
 
 .loading-container p {
   margin-top: 16px;
-  color: rgba(0, 0, 0, 0.6);
+  color: var(--mat-sys-on-surface-variant);
 }
 
 .signal-table {
   width: 100%;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   border-radius: 8px;
   overflow: hidden;
+  background-color: var(--mat-sys-surface-container);
 }
 
 .signal-table mat-header-cell {
   font-weight: bold;
-  background-color: #f5f5f5;
+  background-color: var(--mat-sys-surface-container-high);
+  color: var(--mat-sys-on-surface);
 }
 
 .signal-table mat-cell,
 .signal-table mat-header-cell {
   padding: 12px 8px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
+  color: var(--mat-sys-on-surface);
 }
 
 .signal-table mat-row:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: var(--mat-sys-surface-container-highest);
 }
 
 .signal-table mat-row:nth-child(even) {
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: var(--mat-sys-surface-container-low);
 }
 
 mat-paginator {
-  background-color: #f5f5f5;
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  background-color: var(--mat-sys-surface-container-high);
+  border-top: 1px solid var(--mat-sys-outline-variant);
+  color: var(--mat-sys-on-surface);
+}
+
+/* Responsive table */
+@media screen and (max-width: 1200px) {
+  .signal-table {
+    font-size: 14px;
+  }
+  
+  .signal-table mat-cell,
+  .signal-table mat-header-cell {
+    padding: 8px 4px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .table-container {
+    padding: 10px;
+  }
+  
+  .signal-table {
+    font-size: 12px;
+  }
+  
+  .signal-table mat-cell,
+  .signal-table mat-header-cell {
+    padding: 6px 2px;
+  }
 }
 
 /* Responsive table */

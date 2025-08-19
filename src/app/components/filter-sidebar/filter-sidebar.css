@@ -3,6 +3,8 @@
   width: 100%;
   max-width: 500px;
   margin: 16px;
+  background-color: var(--mat-sys-surface-container);
+  color: var(--mat-sys-on-surface);
 }
 
 .filter-form {
@@ -27,16 +29,17 @@
 
 .date-time-section,
 .range-section {
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--mat-sys-outline-variant);
   border-radius: 8px;
   padding: 16px;
   margin-top: 8px;
+  background-color: var(--mat-sys-surface-container-low);
 }
 
 .date-time-section h4,
 .range-section h4 {
   margin: 0 0 16px 0;
-  color: rgba(0, 0, 0, 0.6);
+  color: var(--mat-sys-on-surface-variant);
   font-size: 14px;
   font-weight: 500;
 }
@@ -110,23 +113,24 @@
   }
 }
 
-/* Custom chip styling */
+/* Custom chip styling for dark mode */
 mat-chip {
-  background-color: rgba(0, 188, 212, 0.1) !important;
-  color: #00bcd4 !important;
+  background-color: var(--mat-sys-primary-container) !important;
+  color: var(--mat-sys-on-primary-container) !important;
 }
 
 mat-chip mat-icon {
-  color: #00bcd4 !important;
+  color: var(--mat-sys-on-primary-container) !important;
 }
 
-/* Form field styling */
+/* Form field styling for dark mode */
 .mat-mdc-form-field {
   margin-bottom: 8px;
 }
 
 .mat-mdc-form-field-hint {
   font-size: 12px;
+  color: var(--mat-sys-on-surface-variant);
 }
 
 /* Section headers */
@@ -134,4 +138,17 @@ h4 {
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
   letter-spacing: 0.25px;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+/* Button styling for dark mode */
+.filter-actions button {
+  background-color: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
+}
+
+.filter-actions button[mat-stroked-button] {
+  border-color: var(--mat-sys-outline);
+  color: var(--mat-sys-primary);
+  background-color: transparent;
 }

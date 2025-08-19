@@ -2,18 +2,21 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--mat-sys-surface);
 }
 
 .app-toolbar {
   z-index: 1000;
   position: relative;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  background-color: var(--mat-sys-surface-container);
 }
 
 .toolbar-title {
   font-size: 1.25rem;
   font-weight: 500;
   margin-left: 16px;
+  color: var(--mat-sys-on-surface);
 }
 
 .toolbar-spacer {
@@ -22,19 +25,48 @@
 
 .sidenav-container {
   flex: 1;
-  background-color: #fafafa;
+  background-color: var(--mat-sys-surface);
 }
 
 .filter-sidenav {
   width: 500px;
-  background-color: #ffffff;
-  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  background-color: var(--mat-sys-surface-container);
+  border-right: 1px solid var(--mat-sys-outline-variant);
 }
 
 .main-content {
   padding: 0;
-  background-color: #fafafa;
+  background-color: var(--mat-sys-surface);
   min-height: calc(100vh - 64px);
+}
+
+/* Responsive design */
+@media screen and (max-width: 1024px) {
+  .filter-sidenav {
+    width: 420px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .filter-sidenav {
+    width: 380px;
+  }
+  
+  .toolbar-title {
+    font-size: 1.1rem;
+    margin-left: 8px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .filter-sidenav {
+    width: 320px;
+  }
+  
+  .toolbar-title {
+    font-size: 1rem;
+    margin-left: 4px;
+  }
 }
 
 /* Responsive design */
