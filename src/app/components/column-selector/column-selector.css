@@ -1,0 +1,77 @@
+.menu-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: var(--mat-sys-on-surface);
+  cursor: default;
+}
+
+.menu-header mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.control-buttons {
+  display: flex;
+  gap: 4px;
+  padding: 8px 0;
+  justify-content: space-between;
+  cursor: default;
+}
+
+.control-btn {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 11px;
+  min-width: 60px;
+  height: 28px;
+  padding: 0 8px;
+}
+
+.control-btn mat-icon {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+}
+
+.column-menu-item {
+  min-height: 40px;
+  cursor: pointer;
+}
+
+.column-menu-item:hover {
+  background-color: var(--mat-sys-surface-variant);
+}
+
+.column-label {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.column-type {
+  font-size: 11px;
+  opacity: 0.7;
+  margin-left: 4px;
+}
+
+/* Global menu styling */
+:host ::ng-deep .column-menu {
+  max-width: 280px;
+  max-height: 400px;
+}
+
+:host ::ng-deep .column-menu .mat-mdc-menu-content {
+  padding: 0;
+}
+
+:host ::ng-deep .column-menu mat-divider {
+  margin: 0;
+}
+
+/* Toolbar integration */
+.toolbar-column-selector {
+  margin-right: 8px;
+}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, delay, throwError } from 'rxjs';
-import { SignalData } from '../models/signal-data.interface';
+import { SignalData, ColumnConfig } from '../models/signal-data.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -141,5 +141,21 @@ export class SignalDataService {
   // Simulate error for testing error handling
   getSignalsWithError(): Observable<SignalData[]> {
     return throwError(() => new Error('Simulated network error'));
+  }
+
+  getDefaultColumnConfig(): ColumnConfig[] {
+    return [
+      { key: 'id', label: 'ID', visible: true, type: 'number' },
+      { key: 'callSign', label: 'Call Sign', visible: true, type: 'string' },
+      { key: 'frequency', label: 'Frequency', visible: true, type: 'number', unit: 'MHz' },
+      { key: 'mode', label: 'Mode', visible: true, type: 'string' },
+      { key: 'band', label: 'Band', visible: true, type: 'string' },
+      { key: 'signalStrength', label: 'Signal Strength', visible: true, type: 'number', unit: 'dB' },
+      { key: 'timestamp', label: 'Timestamp', visible: true, type: 'date' },
+      { key: 'location', label: 'Location', visible: false, type: 'string' },
+      { key: 'country', label: 'Country', visible: false, type: 'string' },
+      { key: 'power', label: 'Power', visible: false, type: 'number', unit: 'W' },
+      { key: 'notes', label: 'Notes', visible: false, type: 'string' }
+    ];
   }
 }

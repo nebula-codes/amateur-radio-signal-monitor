@@ -19,6 +19,14 @@ export interface DateTimeFilter {
   endTime: string;
 }
 
+export interface ColumnConfig {
+  key: keyof SignalData;
+  label: string;
+  visible: boolean;
+  type: 'string' | 'number' | 'date' | 'boolean';
+  unit?: string;
+}
+
 export interface SignalFilters {
   modes: string[];
   bands: string[];

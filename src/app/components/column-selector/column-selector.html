@@ -1,0 +1,44 @@
+<button mat-icon-button [matMenuTriggerFor]="columnMenu" 
+        aria-label="Configure visible columns"
+        matTooltip="Configure Columns">
+  <mat-icon>view_column</mat-icon>
+</button>
+
+<mat-menu #columnMenu="matMenu" class="column-menu">
+  <div class="menu-header" mat-menu-item disabled>
+    <mat-icon>view_column</mat-icon>
+    <span>Column Visibility</span>
+  </div>
+  
+  <mat-divider></mat-divider>
+  
+  <div class="control-buttons" mat-menu-item disabled>
+    <button mat-stroked-button (click)="selectAll(); $event.stopPropagation()" class="control-btn">
+      <mat-icon>select_all</mat-icon>
+      All
+    </button>
+    <button mat-stroked-button (click)="selectNone(); $event.stopPropagation()" class="control-btn">
+      <mat-icon>deselect</mat-icon>
+      None
+    </button>
+    <button mat-stroked-button (click)="resetToDefault(); $event.stopPropagation()" class="control-btn">
+      <mat-icon>refresh</mat-icon>
+      Default
+    </button>
+  </div>
+  
+  <mat-divider></mat-divider>
+
+  <div *ngFor="let column of columns" mat-menu-item 
+       (click)="onColumnToggle(column); $event.stopPropagation()" 
+       class="column-menu-item">
+    <mat-checkbox 
+      [checked]="column.visible"
+      (click)="$event.stopPropagation()"
+      (change)="onColumnToggle(column)"
+      [color]="'primary'">
+      <span class="column-label">{{ column.label }}</span>
+      <span class="column-type" *ngIf="column.unit">({{ column.unit }})</span>
+    </mat-checkbox>
+  </div>
+</mat-menu>

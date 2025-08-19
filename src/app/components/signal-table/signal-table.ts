@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
@@ -6,7 +6,7 @@ import { MatSortModule, MatSort } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Subject, takeUntil, catchError, finalize } from 'rxjs';
-import { SignalData, SignalFilters } from '../../models/signal-data.interface';
+import { SignalData, SignalFilters, ColumnConfig } from '../../models/signal-data.interface';
 import { SignalDataService } from '../../services/signal-data.service';
 import { FilterService } from '../../services/filter.service';
 
@@ -26,19 +26,13 @@ import { FilterService } from '../../services/filter.service';
 export class SignalTableComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @Input() columnConfig: ColumnConfig[] = [];
 
-  displayedColumns: string[] = [
-    'callSign',
-    'frequency',
-    'mode',
-    'band',
-    'signalStrength',
-    'timestamp',
-    'location',
-    'country',
-    'power',
-    'notes'
-  ];
+  get displayedColumns(): string[] {
+    return this.columnConfig
+      .filter(col => col.visible)
+      .map(col => col.key);
+  }
 
   dataSource = new MatTableDataSource<SignalData>();
   allSignals: SignalData[] = [];
@@ -159,5 +153,37 @@ export class SignalTableComponent implements OnInit, OnDestroy, AfterViewInit {
 
   formatTimestamp(timestamp: Date): string {
     return new Date(timestamp).toLocaleString();
+  }
+
+  getColumnLabel(columnKey: string): string {
+    const column = this.columnConfig.find(col => col.key === columnKey);
+    return column ? column.label : columnKey;
+  }
+
+  formatCellValue(value: any, columnKey: string): string {
+    if (value === null || value === undefined) {
+      return '';
+    }
+
+    const column = this.columnConfig.find(col => col.key === columnKey);
+    if (!column) {
+      return String(value);
+    }
+
+    switch (column.type) {
+      case 'number':
+        if (column.unit) {
+          return `${Number(value).toFixed(column.key === 'frequency' ? 3 : column.key === 'signalStrength' ? 1 : 0)} ${column.unit}`;
+        }
+        return String(value);
+      case 'date':
+        return this.formatTimestamp(value);
+      default:
+        return String(value);
+    }
+  }
+
+  getCellValue(element: SignalData, columnKey: string): any {
+    return (element as any)[columnKey];
   }
 }
