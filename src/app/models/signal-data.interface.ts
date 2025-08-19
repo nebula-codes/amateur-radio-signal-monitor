@@ -9,6 +9,8 @@ export interface SignalData {
   location: string;         // Geographic location (e.g., "Grid Square FN20")
   country: string;          // Country of origin
   power: number;            // Transmit power in watts (1-1500)
+  latitude: number;         // Latitude coordinate (-90 to 90)
+  longitude: number;        // Longitude coordinate (-180 to 180)
   notes?: string;           // Optional notes about the signal
 }
 

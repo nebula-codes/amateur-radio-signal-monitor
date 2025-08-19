@@ -1,0 +1,124 @@
+<div class="signal-modal">
+  <div mat-dialog-title class="modal-header">
+    <h2>Signal Details - {{ signal.callSign }}</h2>
+    <button mat-icon-button (click)="close()" class="close-button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div mat-dialog-content class="modal-content">
+    <mat-tab-group class="signal-tabs">
+      
+      <!-- Details Tab -->
+      <mat-tab label="Details">
+        <div class="tab-content">
+          <mat-card class="details-card">
+            <mat-card-content>
+              <mat-list>
+                <mat-list-item>
+                  <div matListItemTitle>Call Sign</div>
+                  <div matListItemLine>{{ signal.callSign }}</div>
+                </mat-list-item>
+                
+                <mat-list-item>
+                  <div matListItemTitle>Frequency</div>
+                  <div matListItemLine>{{ formatFrequency(signal.frequency) }}</div>
+                </mat-list-item>
+                
+                <mat-list-item>
+                  <div matListItemTitle>Mode</div>
+                  <div matListItemLine>{{ signal.mode }}</div>
+                </mat-list-item>
+                
+                <mat-list-item>
+                  <div matListItemTitle>Band</div>
+                  <div matListItemLine>{{ signal.band }}</div>
+                </mat-list-item>
+                
+                <mat-list-item>
+                  <div matListItemTitle>Signal Strength</div>
+                  <div matListItemLine>{{ formatSignalStrength(signal.signalStrength) }}</div>
+                </mat-list-item>
+                
+                <mat-list-item>
+                  <div matListItemTitle>Power</div>
+                  <div matListItemLine>{{ formatPower(signal.power) }}</div>
+                </mat-list-item>
+                
+                <mat-list-item>
+                  <div matListItemTitle>Timestamp</div>
+                  <div matListItemLine>{{ formatTimestamp(signal.timestamp) }}</div>
+                </mat-list-item>
+                
+                <mat-list-item>
+                  <div matListItemTitle>Location</div>
+                  <div matListItemLine>{{ signal.location }}, {{ signal.country }}</div>
+                </mat-list-item>
+                
+                <mat-list-item>
+                  <div matListItemTitle>Coordinates</div>
+                  <div matListItemLine>{{ formatCoordinates(signal.latitude, signal.longitude) }}</div>
+                </mat-list-item>
+                
+                <mat-list-item *ngIf="signal.notes">
+                  <div matListItemTitle>Notes</div>
+                  <div matListItemLine>{{ signal.notes }}</div>
+                </mat-list-item>
+              </mat-list>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </mat-tab>
+
+      <!-- Map Tab -->
+      <mat-tab label="Location">
+        <div class="tab-content">
+          <mat-card class="map-card">
+            <mat-card-header>
+              <mat-card-title>Signal Location</mat-card-title>
+              <mat-card-subtitle>{{ formatCoordinates(signal.latitude, signal.longitude) }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="map-placeholder">
+                <mat-icon class="map-icon">place</mat-icon>
+                <p>Interactive Map Coming Soon</p>
+                <p class="coordinates-text">
+                  Latitude: {{ signal.latitude.toFixed(4) }}°<br>
+                  Longitude: {{ signal.longitude.toFixed(4) }}°<br>
+                  Location: {{ signal.location }}, {{ signal.country }}
+                </p>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </mat-tab>
+
+      <!-- Signal Image Tab -->
+      <mat-tab label="Signal">
+        <div class="tab-content">
+          <mat-card class="image-card">
+            <mat-card-header>
+              <mat-card-title>Signal Capture</mat-card-title>
+              <mat-card-subtitle>{{ signal.mode }} on {{ signal.band }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="image-placeholder">
+                <mat-icon class="signal-icon">graphic_eq</mat-icon>
+                <p>Signal Thumbnail</p>
+                <p class="image-text">
+                  Signal image capture will be displayed here<br>
+                  {{ formatFrequency(signal.frequency) }} - {{ signal.mode }}
+                </p>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </mat-tab>
+
+    </mat-tab-group>
+  </div>
+
+  <div mat-dialog-actions class="modal-actions">
+    <button mat-raised-button color="primary" (click)="close()">Close</button>
+  </div>
+</div>

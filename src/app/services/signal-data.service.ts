@@ -70,6 +70,8 @@ export class SignalDataService {
         location: this.getRandomItem(this.gridSquares),
         country: this.getRandomItem(this.countries),
         power: this.getRandomNumber(1, 1500),
+        latitude: this.getRandomNumber(-90, 90),
+        longitude: this.getRandomNumber(-180, 180),
         notes: Math.random() > 0.7 ? this.generateRandomNote() : undefined
       };
       

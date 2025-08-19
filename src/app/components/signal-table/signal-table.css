@@ -21,9 +21,9 @@
 
 .signal-table {
   width: 100%;
-  min-width: 800px;
+  /* min-width: 800px; */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  border-radius: 8px;
+  border-radius: 0px;
   overflow: hidden;
   background-color: var(--mat-sys-surface-container);
 }
@@ -43,6 +43,15 @@
 
 .signal-table mat-row:hover {
   background-color: var(--mat-sys-surface-container-highest);
+}
+
+.clickable-row {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.clickable-row:hover {
+  background-color: var(--mat-sys-primary-container) !important;
 }
 
 .signal-table mat-row:nth-child(even) {

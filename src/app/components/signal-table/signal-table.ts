@@ -8,10 +8,12 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialog } from '@angular/material/dialog';
 import { Subject, takeUntil, catchError, finalize } from 'rxjs';
 import { SignalData, SignalFilters, ColumnConfig } from '../../models/signal-data.interface';
 import { SignalDataService } from '../../services/signal-data.service';
 import { FilterService } from '../../services/filter.service';
+import { SignalDetailModal } from '../signal-detail-modal/signal-detail-modal';
 
 @Component({
   selector: 'app-signal-table',
@@ -50,7 +52,8 @@ export class SignalTableComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private signalDataService: SignalDataService,
     private filterService: FilterService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {
     this.currentFilters = this.filterService.getEmptyFilters();
     
@@ -216,5 +219,18 @@ export class SignalTableComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onAction6(signal: SignalData): void {
     console.log('Action 6 - Signal Data:', signal);
+  }
+
+  openSignalDetail(signal: SignalData): void {
+    const dialogRef = this.dialog.open(SignalDetailModal, {
+      data: signal,
+      width: '600px',
+      maxWidth: '90vw',
+      maxHeight: '90vh'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Signal detail modal was closed');
+    });
   }
 }

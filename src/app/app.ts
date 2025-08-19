@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { SignalTableComponent } from './components/signal-table/signal-table';
 import { FilterSidebarComponent } from './components/filter-sidebar/filter-sidebar';
 import { ColumnSelectorComponent } from './components/column-selector/column-selector';
+import { SignalDetailModal } from './components/signal-detail-modal/signal-detail-modal';
 import { SignalFilters, ColumnConfig } from './models/signal-data.interface';
 import { SignalDataService } from './services/signal-data.service';
 
@@ -22,7 +23,8 @@ import { SignalDataService } from './services/signal-data.service';
     MatButtonModule,
     SignalTableComponent,
     FilterSidebarComponent,
-    ColumnSelectorComponent
+    ColumnSelectorComponent,
+    SignalDetailModal
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'

@@ -1,0 +1,130 @@
+.signal-modal {
+  width: 600px;
+  max-width: 90vw;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: var(--mat-sys-on-surface);
+}
+
+.close-button {
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.modal-content {
+  min-height: 400px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.signal-tabs {
+  width: 100%;
+}
+
+.tab-content {
+  padding: 16px 0;
+}
+
+.details-card,
+.map-card,
+.image-card {
+  background-color: var(--mat-sys-surface-container);
+  color: var(--mat-sys-on-surface);
+}
+
+.map-placeholder,
+.image-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
+  background-color: var(--mat-sys-surface-container-low);
+  border: 2px dashed var(--mat-sys-outline-variant);
+  border-radius: 8px;
+  color: var(--mat-sys-on-surface-variant);
+  text-align: center;
+  padding: 24px;
+}
+
+.map-icon,
+.signal-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  color: var(--mat-sys-primary);
+}
+
+.coordinates-text,
+.image-text {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-top: 16px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 16px 0 0 0;
+}
+
+/* Mat-list styling for dark mode */
+mat-list-item {
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
+}
+
+mat-list-item:last-child {
+  border-bottom: none;
+}
+
+.mat-mdc-list-item-title {
+  font-weight: 500;
+  color: var(--mat-sys-on-surface);
+}
+
+.mat-mdc-list-item-line {
+  color: var(--mat-sys-on-surface-variant);
+  font-size: 14px;
+}
+
+/* Tab styling */
+.mat-mdc-tab-group {
+  background-color: var(--mat-sys-surface);
+}
+
+.mat-mdc-tab {
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.mat-mdc-tab.mdc-tab--active {
+  color: var(--mat-sys-primary);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .signal-modal {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
+  }
+  
+  .modal-content {
+    max-height: 60vh;
+  }
+  
+  .map-placeholder,
+  .image-placeholder {
+    min-height: 200px;
+    padding: 16px;
+  }
+}
