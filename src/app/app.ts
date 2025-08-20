@@ -5,12 +5,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { SignalTableComponent } from './components/signal-table/signal-table';
 import { FilterSidebarComponent } from './components/filter-sidebar/filter-sidebar';
 import { ColumnSelectorComponent } from './components/column-selector/column-selector';
+import { ThumbnailBrowserComponent } from './components/thumbnail-browser/thumbnail-browser';
 import { SignalDetailModal } from './components/signal-detail-modal/signal-detail-modal';
 import { SignalFilters, ColumnConfig } from './models/signal-data.interface';
 import { SignalDataService } from './services/signal-data.service';
+import { FilterService } from './services/filter.service';
 
 @Component({
   selector: 'app-root',
@@ -21,9 +24,11 @@ import { SignalDataService } from './services/signal-data.service';
     MatSidenavModule,
     MatIconModule,
     MatButtonModule,
+    MatButtonToggleModule,
     SignalTableComponent,
     FilterSidebarComponent,
     ColumnSelectorComponent,
+    ThumbnailBrowserComponent,
     SignalDetailModal
   ],
   templateUrl: './app.html',
@@ -31,19 +36,32 @@ import { SignalDataService } from './services/signal-data.service';
 })
 export class App implements OnInit {
   @ViewChild(SignalTableComponent) signalTable!: SignalTableComponent;
+  @ViewChild(ThumbnailBrowserComponent) thumbnailBrowser!: ThumbnailBrowserComponent;
   
   title = 'Amateur Radio Signal Monitor';
   sidenavOpened = true;
   columnConfig: ColumnConfig[] = [];
+  viewMode: 'table' | 'thumbnails' = 'table';
+  currentFilters: SignalFilters;
 
-  constructor(private signalDataService: SignalDataService) {}
+  constructor(
+    private signalDataService: SignalDataService,
+    private filterService: FilterService
+  ) {
+    this.currentFilters = this.filterService.getEmptyFilters();
+  }
 
   ngOnInit(): void {
     this.columnConfig = this.signalDataService.getDefaultColumnConfig();
   }
 
   onFiltersChanged(filters: SignalFilters): void {
-    this.signalTable.applyFilters(filters);
+    this.currentFilters = filters;
+    if (this.viewMode === 'table' && this.signalTable) {
+      this.signalTable.applyFilters(filters);
+    } else if (this.viewMode === 'thumbnails' && this.thumbnailBrowser) {
+      this.thumbnailBrowser.applyFilters(filters);
+    }
   }
 
   onColumnsChanged(columns: ColumnConfig[]): void {
@@ -52,5 +70,13 @@ export class App implements OnInit {
 
   toggleSidenav(): void {
     this.sidenavOpened = !this.sidenavOpened;
+  }
+
+  onViewModeChange(mode: 'table' | 'thumbnails'): void {
+    this.viewMode = mode;
+    // Apply current filters to the newly selected view
+    setTimeout(() => {
+      this.onFiltersChanged(this.currentFilters);
+    });
   }
 }

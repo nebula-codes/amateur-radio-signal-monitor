@@ -1,0 +1,72 @@
+<div class="thumbnail-container">
+  <!-- Loading Spinner -->
+  <div *ngIf="isLoading" class="loading-container">
+    <mat-spinner></mat-spinner>
+    <p>Loading signal thumbnails...</p>
+  </div>
+
+  <!-- Thumbnail Grid -->
+  <div *ngIf="!isLoading" class="thumbnail-grid">
+    <mat-card 
+      *ngFor="let signal of filteredSignals" 
+      class="signal-thumbnail-card"
+      (click)="openSignalDetail(signal)">
+      
+      <!-- Signal Image -->
+      <div class="image-container">
+        <img 
+          [src]="getSignalImageUrl(signal)" 
+          [alt]="'Signal from ' + signal.callSign"
+          class="signal-image"
+          loading="lazy">
+        
+        <!-- Overlay with signal info -->
+        <div class="image-overlay">
+          <div class="overlay-content">
+            <span class="call-sign">{{ signal.callSign }}</span>
+            <span class="frequency">{{ formatFrequency(signal.frequency) }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Content -->
+      <mat-card-content class="card-content">
+        <div class="signal-info">
+          <div class="primary-info">
+            <h3 class="call-sign-title">{{ signal.callSign }}</h3>
+            <p class="frequency-text">{{ formatFrequency(signal.frequency) }}</p>
+          </div>
+          
+          <div class="secondary-info">
+            <div class="info-row">
+              <mat-icon class="info-icon">radio</mat-icon>
+              <span>{{ signal.mode }} • {{ signal.band }}</span>
+            </div>
+            
+            <div class="info-row">
+              <mat-icon class="info-icon">signal_cellular_alt</mat-icon>
+              <span>{{ signal.signalStrength.toFixed(1) }} dB</span>
+            </div>
+            
+            <div class="info-row">
+              <mat-icon class="info-icon">schedule</mat-icon>
+              <span>{{ formatTimestamp(signal.timestamp) }}</span>
+            </div>
+            
+            <div class="info-row" *ngIf="signal.location">
+              <mat-icon class="info-icon">location_on</mat-icon>
+              <span>{{ signal.location }}</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- No Results Message -->
+  <div *ngIf="!isLoading && filteredSignals.length === 0" class="no-results">
+    <mat-icon class="no-results-icon">image_not_supported</mat-icon>
+    <h3>No signals found</h3>
+    <p>Try adjusting your filters to see more signals.</p>
+  </div>
+</div>

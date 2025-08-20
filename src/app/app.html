@@ -7,8 +7,22 @@
     <span class="toolbar-title">{{ title }}</span>
     <span class="toolbar-spacer"></span>
     
-    <!-- Column Selector in Toolbar -->
+    <!-- View Mode Toggle -->
+    <mat-button-toggle-group 
+      [value]="viewMode" 
+      (change)="onViewModeChange($event.value)"
+      class="view-toggle">
+      <mat-button-toggle value="table" aria-label="Table view">
+        <mat-icon>table_view</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="thumbnails" aria-label="Thumbnail view">
+        <mat-icon>grid_view</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+    
+    <!-- Column Selector in Toolbar (only show for table view) -->
     <app-column-selector 
+      *ngIf="viewMode === 'table'"
       [columns]="columnConfig" 
       (columnsChange)="onColumnsChanged($event)"
       class="toolbar-column-selector">
@@ -31,7 +45,17 @@
 
     <!-- Main Content -->
     <mat-sidenav-content class="main-content">
-      <app-signal-table [columnConfig]="columnConfig"></app-signal-table>
+      <!-- Table View -->
+      <app-signal-table 
+        *ngIf="viewMode === 'table'"
+        [columnConfig]="columnConfig">
+      </app-signal-table>
+      
+      <!-- Thumbnail View -->
+      <app-thumbnail-browser 
+        *ngIf="viewMode === 'thumbnails'"
+        [filters]="currentFilters">
+      </app-thumbnail-browser>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
