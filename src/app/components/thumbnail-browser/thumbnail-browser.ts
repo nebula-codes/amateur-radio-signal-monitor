@@ -5,6 +5,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { Subject, takeUntil, catchError, finalize } from 'rxjs';
 
@@ -21,7 +22,8 @@ import { SignalDetailModal } from '../signal-detail-modal/signal-detail-modal';
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatPaginatorModule
   ],
   templateUrl: './thumbnail-browser.html',
   styleUrl: './thumbnail-browser.css'
@@ -31,7 +33,10 @@ export class ThumbnailBrowserComponent implements OnInit, OnDestroy {
 
   signals: SignalData[] = [];
   filteredSignals: SignalData[] = [];
+  paginatedSignals: SignalData[] = [];
   isLoading = false;
+  pageSize = 30;
+  currentPageIndex = 0;
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -46,6 +51,13 @@ export class ThumbnailBrowserComponent implements OnInit, OnDestroy {
       this.filters = this.filterService.getEmptyFilters();
     }
     this.loadSignals();
+  }
+
+  onPageChange(event: PageEvent): void {
+    console.log('THUMBNAIL BROWSER - Page change event:', event);
+    this.currentPageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.updatePaginatedSignals();
   }
 
   ngOnDestroy(): void {
@@ -73,22 +85,39 @@ export class ThumbnailBrowserComponent implements OnInit, OnDestroy {
       )
       .subscribe(data => {
         this.signals = data;
-        console.log('Thumbnail browser - signals loaded:', data.length);
+        console.log('THUMBNAIL BROWSER - signals loaded:', data.length);
         if (this.filters) {
           this.applyFilters(this.filters);
         } else {
           // If no filters provided, show all signals
           this.filteredSignals = this.signals;
-          console.log('Thumbnail browser - no filters, showing all signals:', this.filteredSignals.length);
+          console.log('THUMBNAIL BROWSER - no filters, showing all signals:', this.filteredSignals.length);
+          // Use setTimeout to ensure paginator is initialized
+          setTimeout(() => this.updatePaginatedSignals());
         }
       });
   }
 
   applyFilters(filters: SignalFilters): void {
     this.filters = filters;
-    console.log('Thumbnail browser - applying filters:', filters);
+    console.log('THUMBNAIL BROWSER - applying filters:', filters);
     this.filteredSignals = this.filterService.applyFilters(this.signals, filters);
-    console.log('Thumbnail browser - filtered signals count:', this.filteredSignals.length);
+    console.log('THUMBNAIL BROWSER - filtered signals count:', this.filteredSignals.length);
+    
+    // Reset pagination to first page when filters change
+    this.currentPageIndex = 0;
+    // Use setTimeout to ensure paginator is initialized
+    setTimeout(() => this.updatePaginatedSignals());
+  }
+
+  updatePaginatedSignals(): void {
+    const startIndex = this.currentPageIndex * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.paginatedSignals = this.filteredSignals.slice(startIndex, endIndex);
+    console.log('THUMBNAIL BROWSER - updatePaginatedSignals called');
+    console.log('THUMBNAIL BROWSER - Paginated signals:', this.paginatedSignals.length, 'from', startIndex, 'to', endIndex);
+    console.log('THUMBNAIL BROWSER - Total filtered signals:', this.filteredSignals.length);
+    console.log('THUMBNAIL BROWSER - Current page index:', this.currentPageIndex, 'page size:', this.pageSize);
   }
 
   openSignalDetail(signal: SignalData): void {

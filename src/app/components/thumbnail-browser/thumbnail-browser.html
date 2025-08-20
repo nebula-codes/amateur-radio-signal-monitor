@@ -6,11 +6,12 @@
   </div>
 
   <!-- Thumbnail Grid -->
-  <div *ngIf="!isLoading" class="thumbnail-grid">
-    <mat-card 
-      *ngFor="let signal of filteredSignals" 
-      class="signal-thumbnail-card"
-      (click)="openSignalDetail(signal)">
+  <div *ngIf="!isLoading" class="thumbnail-content">
+    <div class="thumbnail-grid">
+      <mat-card 
+        *ngFor="let signal of paginatedSignals" 
+        class="signal-thumbnail-card"
+        (click)="openSignalDetail(signal)">
       
       <!-- Signal Image -->
       <div class="image-container">
@@ -61,6 +62,18 @@
         </div>
       </mat-card-content>
     </mat-card>
+    </div>
+
+    <!-- Paginator -->
+    <mat-paginator 
+      [length]="filteredSignals.length"
+      [pageSize]="pageSize"
+      [pageIndex]="currentPageIndex"
+      [pageSizeOptions]="[15, 30, 60, 100]"
+      [showFirstLastButtons]="true"
+      (page)="onPageChange($event)"
+      class="thumbnail-paginator">
+    </mat-paginator>
   </div>
 
   <!-- No Results Message -->

@@ -18,11 +18,25 @@
   color: var(--mat-sys-on-surface-variant);
 }
 
+.thumbnail-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .thumbnail-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 20px;
   width: 100%;
+}
+
+.thumbnail-paginator {
+  background-color: var(--mat-sys-surface-container-high);
+  border-top: 1px solid var(--mat-sys-outline-variant);
+  color: var(--mat-sys-on-surface);
+  border-radius: 8px;
+  margin-top: 20px;
 }
 
 .signal-thumbnail-card {
