@@ -233,9 +233,12 @@ export class SignalTableComponent implements OnInit, OnDestroy, AfterViewInit {
   openSignalDetail(signal: SignalData): void {
     const dialogRef = this.dialog.open(SignalDetailModal, {
       data: signal,
-      width: '600px',
-      maxWidth: '90vw',
-      maxHeight: '90vh'
+      width: '70vw',
+      height: '80vh',
+      maxWidth: '95vw',
+      maxHeight: '90vh',
+      disableClose: false,
+      panelClass: 'signal-modal'
     });
 
     dialogRef.afterClosed().subscribe(result => {

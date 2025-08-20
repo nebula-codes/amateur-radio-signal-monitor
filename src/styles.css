@@ -50,3 +50,13 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--mat-sys-outline-variant);
 }
+
+/* Override Angular Material dialog border radius for signal modal */
+.cdk-overlay-pane .mat-mdc-dialog-container.signal-modal {
+  border-radius: 30px !important;
+  overflow: hidden !important;
+}
+
+.cdk-overlay-pane:has(.signal-modal) {
+  border-radius: 30px !important;
+}
